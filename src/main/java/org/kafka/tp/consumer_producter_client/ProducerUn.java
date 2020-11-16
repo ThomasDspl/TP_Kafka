@@ -1,4 +1,4 @@
-package org.kafka.tp.producer;
+package org.kafka.tp.consumer_producter_client;
 
 
 import org.apache.kafka.clients.producer.Callback;
@@ -8,6 +8,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
+import org.kafka.tp.producer.ProducerFactory;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

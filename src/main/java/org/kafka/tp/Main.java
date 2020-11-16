@@ -1,7 +1,7 @@
 package org.kafka.tp;
 
-import org.kafka.tp.consumer.ConsumerUn;
-import org.kafka.tp.producer.ProducerUn;
+import org.kafka.tp.consumer_producter_client.ConsumerUn;
+import org.kafka.tp.consumer_producter_client.ProducerUn;
 
 import java.util.Timer;
 
