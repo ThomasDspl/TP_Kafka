@@ -19,7 +19,7 @@ public class ProducerUn extends TimerTask {
 
     private Producer<String, String> producer;
     private Client clientWeb;
-    private String topic;
+    private final String topic;
     private static final String API_URI = "https://api.covid19api.com/summary";
 
     public ProducerUn() {
