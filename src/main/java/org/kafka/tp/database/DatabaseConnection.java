@@ -6,9 +6,12 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private final String url = "jdbc:postgresql://localhost/tpKafka";
-    private final String user = "postgres";
-    private final String password = "root";
+    //private final String url = "jdbc:postgresql://localhost/tpKafka";
+    private final String url = "jdbc:postgres://farkmhhu:1SYc1FfQl6KC0OFg3nyeUbvoQf5YMSWW@kandula.db.elephantsql.com:5432/farkmhhu";
+    //private final String user = "postgres";
+    private final String user = "farkmhhu";
+    private final String password = "1SYc1FfQl6KC0OFg3nyeUbvoQf5YMSWW";
+    //private final String password = "root";
 
     public Connection connect() {
         Connection conn = null;
@@ -26,14 +29,6 @@ public class DatabaseConnection {
         }
 
         return conn;
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        DatabaseConnection app = new DatabaseConnection();
-        app.connect();
     }
 }
 
