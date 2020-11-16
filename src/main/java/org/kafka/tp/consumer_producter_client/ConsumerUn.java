@@ -38,35 +38,36 @@ public class ConsumerUn implements Runnable{
                     if(!json.isEmpty()){
                         JSONObject jsonGlobal = (JSONObject)json.get("Global");
                         StringBuilder sb = new StringBuilder();
-                        sb.append("NewConfirmed :" + String.valueOf((int)jsonGlobal.get("NewConfirmed"))
-                                +"TotalConfirmed :" + String.valueOf((int)jsonGlobal.get("TotalConfirmed"))
-                                +"NewDeaths :"+ String.valueOf((int)jsonGlobal.get("NewDeaths"))
-                                +"TotalDeaths :" + String.valueOf((int)jsonGlobal.get("TotalDeaths"))
-                                +"NewRecovered :" +String.valueOf((int)jsonGlobal.get("NewRecovered"))
-                                +"TotalRecovered :"+ String.valueOf((int)jsonGlobal.get("TotalRecovered")));
+                        sb.append("NewConfirmed :" + String.valueOf((long)jsonGlobal.get("NewConfirmed"))
+                                +"TotalConfirmed :" + String.valueOf((long)jsonGlobal.get("TotalConfirmed"))
+                                +"NewDeaths :"+ String.valueOf((long)jsonGlobal.get("NewDeaths"))
+                                +"TotalDeaths :" + String.valueOf((long)jsonGlobal.get("TotalDeaths"))
+                                +"NewRecovered :" +String.valueOf((long)jsonGlobal.get("NewRecovered"))
+                                +"TotalRecovered :"+ String.valueOf((long)jsonGlobal.get("TotalRecovered")));
                         String requete = " ";
                         System.out.println(sb.toString());
                         JSONArray jsonCountries = (JSONArray)json.get("Countries");
                         jsonCountries.forEach(c->{
                             JSONObject jsonCourant = (JSONObject)c;
                             StringBuilder sb1 =new StringBuilder();
-                            sb1.append("Country :" + (String)jsonCourant.get("NewConfirmed")
-                                    +"CountryCode :" + (String)jsonCourant.get("NewConfirmed")
-                                    +"Slug :" + (String)jsonCourant.get("NewConfirmed")
-                                    +"NewConfirmed :" + String.valueOf((int)jsonCourant.get("NewConfirmed"))
-                                    +"TotalConfirmed :" + String.valueOf((int)jsonCourant.get("TotalConfirmed"))
-                                    +"NewDeaths :"+ String.valueOf((int)jsonCourant.get("NewDeaths"))
-                                    +"TotalDeaths :" + String.valueOf((int)jsonCourant.get("TotalDeaths"))
-                                    +"NewRecovered :" +String.valueOf((int)jsonCourant.get("NewRecovered"))
-                                    +"TotalRecovered :"+ String.valueOf((int)jsonCourant.get("TotalRecovered")));
+                            sb1.append("Country :" + (String)jsonCourant.get("Country")
+                                    +"CountryCode :" + (String)jsonCourant.get("CountryCode")
+                                    +"Slug :" + (String)jsonCourant.get("Slug")
+                                    +"NewConfirmed :" + String.valueOf((long)jsonCourant.get("NewConfirmed"))
+                                    +"TotalConfirmed :" + String.valueOf((long)jsonCourant.get("TotalConfirmed"))
+                                    +"NewDeaths :"+ String.valueOf((long)jsonCourant.get("NewDeaths"))
+                                    +"TotalDeaths :" + String.valueOf((long)jsonCourant.get("TotalDeaths"))
+                                    +"NewRecovered :" +String.valueOf((long)jsonCourant.get("NewRecovered"))
+                                    +"TotalRecovered :"+ String.valueOf((long)jsonCourant.get("TotalRecovered")));
+                            System.out.println(sb1.toString());
 
                         });
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                //TODO DEBUG
-                System.out.println(s);
+//                //TODO DEBUG
+//                System.out.println(s);
             });
         }
         consumer.close();

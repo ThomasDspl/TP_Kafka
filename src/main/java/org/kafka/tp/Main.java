@@ -12,7 +12,7 @@ public class Main{
             ConsumerUn c = new ConsumerUn();
             Timer timer = new Timer();
             //TODO Mettre à 1 800 000 pour 30 min
-            timer.schedule(p,0,1000);
+            timer.schedule(p,0,10000);
 
             Thread t = new Thread(c);
             t.run();
