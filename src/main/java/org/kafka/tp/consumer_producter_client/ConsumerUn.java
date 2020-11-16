@@ -28,7 +28,7 @@ public class ConsumerUn implements Runnable{
 
     @Override
     public void run() {
-        database.connect();
+        //database.connect();
         while(!Thread.interrupted()){
             ConsumerRecords<String, String> records = consumer.poll(100);
             records.forEach(stringStringConsumerRecord -> {
@@ -38,6 +38,7 @@ public class ConsumerUn implements Runnable{
                     if(!json.isEmpty()){
                         JSONObject jsonGlobal = (JSONObject)json.get("Global");
                         StringBuilder sb = new StringBuilder();
+
                         sb.append("NewConfirmed :" + String.valueOf((long)jsonGlobal.get("NewConfirmed"))
                                 +"TotalConfirmed :" + String.valueOf((long)jsonGlobal.get("TotalConfirmed"))
                                 +"NewDeaths :"+ String.valueOf((long)jsonGlobal.get("NewDeaths"))
@@ -45,7 +46,6 @@ public class ConsumerUn implements Runnable{
                                 +"NewRecovered :" +String.valueOf((long)jsonGlobal.get("NewRecovered"))
                                 +"TotalRecovered :"+ String.valueOf((long)jsonGlobal.get("TotalRecovered")));
                         String requete = " ";
-                        System.out.println(sb.toString());
                         JSONArray jsonCountries = (JSONArray)json.get("Countries");
                         jsonCountries.forEach(c->{
                             JSONObject jsonCourant = (JSONObject)c;
@@ -59,15 +59,11 @@ public class ConsumerUn implements Runnable{
                                     +"TotalDeaths :" + String.valueOf((long)jsonCourant.get("TotalDeaths"))
                                     +"NewRecovered :" +String.valueOf((long)jsonCourant.get("NewRecovered"))
                                     +"TotalRecovered :"+ String.valueOf((long)jsonCourant.get("TotalRecovered")));
-                            System.out.println(sb1.toString());
-
                         });
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-//                //TODO DEBUG
-//                System.out.println(s);
             });
         }
         consumer.close();
