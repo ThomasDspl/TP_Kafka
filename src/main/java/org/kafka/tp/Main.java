@@ -9,6 +9,7 @@ public class Main{
         public Main() throws InterruptedException {
             ProducerUn p = new ProducerUn();
             Timer timer = new Timer();
+            //TODO Mettre à 1 800 000 pour 30 min
             timer.schedule(p,0,1000);
             while (true){
 
