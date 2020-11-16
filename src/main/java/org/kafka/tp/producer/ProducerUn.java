@@ -1,7 +1,10 @@
 package org.kafka.tp.producer;
 
 
+import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -16,40 +19,34 @@ public class ProducerUn extends TimerTask {
 
     private Producer<String, String> producer;
     private Client clientWeb;
-    private JSONParser parser;
+    private String topic;
     private static final String API_URI = "https://api.covid19api.com/summary";
 
-    public ProducerUn(){
+    public ProducerUn() {
         producer = ProducerFactory.createProducer();
         clientWeb = ClientBuilder.newClient();
-        parser = new JSONParser();
+        topic = "Topic1";
     }
 
     public void run() {
         Response r = clientWeb.target(API_URI).request(MediaType.APPLICATION_JSON).get();
         String jsonString = r.readEntity(String.class);
-
-        try {
-            JSONObject json = (JSONObject) parser.parse(jsonString);
-            System.out.println(json.toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if (!jsonString.equals("")) {
+            ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, jsonString);
+            producer.send(record, new ProducerCallBack());
         }
-
-
-//        Timer timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                System.out.println("Running: " + new java.util.Date());
-//            }
-//        }, 0, 1000); //180000 = 30 min
-
-        //boucle infini
-//        while (!Thread.interrupted()){
-//
-//        }
     }
+    private class ProducerCallBack implements Callback {
 
-
+        @Override
+        public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+            if (e != null){
+                e.printStackTrace();
+            }
+        }
+    }
 }
+
+
+
+
