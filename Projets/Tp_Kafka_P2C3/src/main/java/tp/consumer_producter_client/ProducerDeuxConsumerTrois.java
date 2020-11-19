@@ -35,8 +35,10 @@ public class ProducerDeuxConsumerTrois implements Runnable {
 //            Console console = System.console();
 //            cmd = console.readLine("Entrer votre commande: ");
 
-            System.out.print("Entrer votre commande: ");
-            cmd = scanner.nextLine();
+            do {
+                System.out.print("Entrer votre commande: ");
+                cmd = scanner.nextLine();
+            }while (!menu(cmd));
             ProducerRecord<String, String> record = new ProducerRecord<String, String>(topicProducer, cmd);
             producer.send(record, new ProducerCallBack());
             attendReponse = true;
@@ -53,6 +55,19 @@ public class ProducerDeuxConsumerTrois implements Runnable {
 
         }
         scanner.close();
+    }
+
+
+    private boolean menu(String cmd){
+        String[] cmd_split = cmd.split(" ");
+        switch (cmd_split[0]){
+            case "Get_global_values":
+                    break;
+            case "Get_country_values":
+                break;
+            case "Get_confirmed_avg":
+
+        }
     }
 
     private class ProducerCallBack implements Callback {
